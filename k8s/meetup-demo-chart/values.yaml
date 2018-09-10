@@ -1,0 +1,9 @@
+# Default values for meetup-demo-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  base: eu.gcr.io/dev-ops-meetup/meetup-demo
+  version: 0.0.2

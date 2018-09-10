@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meetup-demo
+  labels:
+    app: {{ template "meetup-demo-chart.name" . }}
+    chart: {{ template "meetup-demo-chart.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "meetup-demo-chart.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "meetup-demo-chart.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: meetup-demo
+        image: "{{ .Values.image.base }}:{{ .Values.image.version }}"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080

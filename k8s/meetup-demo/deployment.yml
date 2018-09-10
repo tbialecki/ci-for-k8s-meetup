@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meetup-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: meetup-demo
+  template:
+    metadata:
+      labels:
+        app: meetup-demo
+    spec:
+      containers:
+      - name: meetup-demo
+        image: eu.gcr.io/dev-ops-meetup/meetup-demo:0.0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080

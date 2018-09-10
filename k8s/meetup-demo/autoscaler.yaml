@@ -1,0 +1,14 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: meetup-demo
+  labels:
+    app: meetup-demo
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1beta2
+    kind: Deployment
+    name: meetup-demo
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 50

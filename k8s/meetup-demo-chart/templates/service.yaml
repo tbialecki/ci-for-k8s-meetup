@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: meetup-demo
+  labels:
+    app: {{ template "meetup-demo-chart.name" . }}
+    chart: {{ template "meetup-demo-chart.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    name: http
+    targetPort: 8080
+  selector:
+    app: {{ template "meetup-demo-chart.name" . }}
+    release: {{ .Release.Name }}
+

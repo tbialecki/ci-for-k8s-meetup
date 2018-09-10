@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meetup-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: meetup-demo
+  template:
+    spec:
+      containers:
+      - name: meetup-demo
+        image: eu.gcr.io/dev-ops-meetup/meetup-demo:0.0.1
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+        volumes:
+          - name: config-volume
+            configMap:
+              name: example-config
+        env:
+        - name: PROPERTY-1
+          valueFrom:
+            configMapKeyRef:
+              name: example-config
+              key: example.property.1
